@@ -2,3 +2,4 @@ venv/
 *.html
 *.xml
 .idea/
+*.pyc

@@ -121,65 +121,51 @@ class Store(API):
 class User(API):
 
     def get_login_user_requests(self, username, password):
-        return self.get_request(f"user/login?username={username}&password={password}")
+        response = self.get_request(f"user/login?username={username}&password={password}")
+        assert response.status_code == 200
+        return response.json()
 
     def get_logout_user_requests(self):
-        return self.get_request("user/logout")
+        response = self.get_request("user/logout")
+        assert response.status_code == 200
+        return response.json()
 
-    def user_get_requests(self, request_data):
-        return self.get_request(f"user/{request_data}")
+    def user_get_requests(self, username):
+        response = self.get_request(f"user/{username}")
+        assert response.status_code == 200
+        return response.json()
 
-    def user_post_requests(self, post_data):
-        return self.post_request("user", post_data)
+    def user_post_requests(self, user_id, username, first_name, last_name, user_email, password, user_phone_number):
+        post_data = {
+            "id": user_id,
+            "username": username,
+            "firstName": first_name,
+            "lastName": last_name,
+            "email": user_email,
+            "password": password,
+            "phone": user_phone_number,
+            "userStatus": 0
+        }
+        response = self.post_request("user", post_data)
+        assert response.status_code == 200
+        return response.json()
 
-    def user_put_requests(self, username, put_data):
-
-        return self.post_request(f"user/{username}", put_data)
+    def user_put_requests(self, user_id, username, first_name, last_name, user_email, password, user_phone_number):
+        put_data = {
+            "id": user_id,
+            "username": username,
+            "firstName": first_name,
+            "lastName": last_name,
+            "email": user_email,
+            "password": password,
+            "phone": user_phone_number,
+            "userStatus": 0
+        }
+        response = self.put_request(f"user/{username}", put_data)
+        assert response.status_code == 200
+        return response.json()
 
     def user_delete_requests(self, username):
-        """?"""
-        return self.delete_request(f"user/{username}")
-
-
-# if __name__ == "__main__":
-#     store_api = Store()
-#     store_data = {
-#         "id": 10,
-#         "petId": 9222968140498034000,
-#         "quantity": 1,
-#         "shipDate": "2021-04-27T16:43:32.000+0000",
-#         "status": "placed",
-#         "complete": True
-#     }
-#     print(store_api.store_get_requests("order", 10))
-#     print(store_api.store_get_requests("inventory"))
-#     print(store_api.store_post_requests(store_data))
-#     print(store_api.store_delete_requests("10"))
-
-    # user_api = User()
-    # user_data = {
-    #     "id": 0,
-    #     "username": "string",
-    #     "firstName": "string",
-    #     "lastName": "string",
-    #     "email": "string",
-    #     "password": "string",
-    #     "phone": "string",
-    #     "userStatus": 0
-    # }
-    # put_user_data = {
-    #     "id": 0,
-    #     "username": "string",
-    #     "firstName": "string",
-    #     "lastName": "string",
-    #     "email": "str@mail.net",
-    #     "password": "string",
-    #     "phone": "string",
-    #     "userStatus": 0
-    # }
-    # print(user_api.user_get_requests("string"))
-    # print(user_api.user_post_requests(user_data))
-    # print(user_api.get_login_user_requests("string", "string"))
-    # print(user_api.user_put_requests("string", put_user_data))
-    # print(user_api.user_delete_requests("string"))
-    # print(user_api.get_logout_user_requests())
+        response = self.delete_request(f"user/{username}")
+        assert response.status_code == 200
+        return response.json()
