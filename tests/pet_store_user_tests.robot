@@ -4,24 +4,23 @@ Library  Collections
 Library  /home/korbut/PycharmProjects/pet_store/api_requests/pet_store_api.py
 Library  pet_store_api.User  WITH NAME  User
 Library  /home/korbut/PycharmProjects/pet_store/helpers/parse_json_user_data.py
-
-*** Variables ***
-${user_id}  9222968140498
-${username}  Max_K
-${firstname}  Max
-${lastname}  Korbut
-${email}  max@mail.com
-${passwd}  1111
-${user_phone_number}  +375 29 111-11-11
-${new_email}  kkk@mail.net
+Library  /home/korbut/PycharmProjects/pet_store/resources/get_variable.py
 
 *** Test Cases ***
 Add new user
     [Documentation]  Add new user and find him by username
+    ${user_id}  Get User Variable  user_id
+    ${username}  Get User Variable  username
+    ${firstname}  Get User Variable  firstname
+    ${lastname}  Get User Variable  lastname
+    ${email}  Get User Variable  email
+    ${passwd}  Get User Variable  passwd
+    ${user_phone_number}  Get User Variable  user_phone_number
+    ${new_email}  Get User Variable  new_email
 
     ${add_user_post_response}  User.user_post_requests  ${user_id}  ${username}  ${firstname}  ${lastname}  ${email}  ${passwd}  ${user_phone_number}
     ${user_add_message}  Get User Message  ${add_user_post_response}
-    Should Be Equal  ${user_add_message}  ${user_id}
+    Should Be Equal  ${${user_add_message}}  ${user_id}
 
     ${user_get_response}  User.user_get_requests  ${username}
     ${added_user_id}  Get User Id  ${user_get_response}
@@ -29,10 +28,18 @@ Add new user
 
 Update user email
     [Documentation]  Add new user, login by new user, update his email, check it and logout
+    ${user_id}  Get User Variable  user_id
+    ${username}  Get User Variable  username
+    ${firstname}  Get User Variable  firstname
+    ${lastname}  Get User Variable  lastname
+    ${email}  Get User Variable  email
+    ${passwd}  Get User Variable  passwd
+    ${user_phone_number}  Get User Variable  user_phone_number
+    ${new_email}  Get User Variable  new_email
 
     ${add_user_post_response}  User.user_post_requests  ${user_id}  ${username}  ${firstname}  ${lastname}  ${email}  ${passwd}  ${user_phone_number}
     ${user_add_message}  Get User Message  ${add_user_post_response}
-    Should Be Equal  ${user_add_message}  ${user_id}
+    Should Be Equal  ${${user_add_message}}  ${user_id}
 
     ${login_user}  User.get_login_user_requests  ${username}  ${passwd}
 
@@ -43,10 +50,18 @@ Update user email
 
 Delete user
     [Documentation]  Add new user, login by new user and delete he
+    ${user_id}  Get User Variable  user_id
+    ${username}  Get User Variable  username
+    ${firstname}  Get User Variable  firstname
+    ${lastname}  Get User Variable  lastname
+    ${email}  Get User Variable  email
+    ${passwd}  Get User Variable  passwd
+    ${user_phone_number}  Get User Variable  user_phone_number
+    ${new_email}  Get User Variable  new_email
 
     ${add_user_post_response}  User.user_post_requests  ${user_id}  ${username}  ${firstname}  ${lastname}  ${email}  ${passwd}  ${user_phone_number}
     ${user_add_message}  Get User Message  ${add_user_post_response}
-    Should Be Equal  ${user_add_message}  ${user_id}
+    Should Be Equal  ${${user_add_message}}  ${user_id}
 
     ${login_user}  User.get_login_user_requests  ${username}  ${passwd}
 
