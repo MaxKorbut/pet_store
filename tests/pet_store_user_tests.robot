@@ -1,13 +1,13 @@
 *** Settings ***
 Library  OperatingSystem
 Library  Collections
-Library  /home/korbut/PycharmProjects/pet_store/api_requests/pet_store_api.py
+Library  ../api_requests/pet_store_api.py
 Library  pet_store_api.User  WITH NAME  User
 
-Library  /home/korbut/PycharmProjects/pet_store/helpers/parse_json_user_data.py
-Library  /home/korbut/PycharmProjects/pet_store/resources/get_variable.py
+Library  ../helpers/parse_json_user_data.py
+Library  ../resources/get_variable.py
 
-Library  /home/korbut/PycharmProjects/pet_store/db/db_methods.py
+Library  ../db/db_methods.py
 Library  db_methods.UserTable  WITH NAME  UserTable
 
 *** Test Cases ***
