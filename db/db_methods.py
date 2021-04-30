@@ -7,7 +7,7 @@ class DataBaseHelpers:
 
     def __init__(self):
         self.connection = pymysql.connect(
-            host="172.17.0.1",
+            host="localhost",
             user="root",
             passwd="1111",
             database="pet_store"
