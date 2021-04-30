@@ -3,15 +3,19 @@ Library  OperatingSystem
 Library  Collections
 Library  /home/korbut/PycharmProjects/pet_store/api_requests/pet_store_api.py
 Library  pet_store_api.Store  WITH NAME  Store
+
 Library  /home/korbut/PycharmProjects/pet_store/helpers/parse_json_store_data.py
 Library  /home/korbut/PycharmProjects/pet_store/resources/get_variable.py
+
+Library  /home/korbut/PycharmProjects/pet_store/db/db_methods.py
+Library  db_methods.PetTable  WITH NAME  PetTable
 
 *** Test Cases ***
 Add new oder for purchasing pet
     [Documentation]  Add new order and check it
-    ${pet_name}  Get Store Variable  pet_name
-    ${pet_id}  Get Store Variable   pet_id
-    ${pet_status}  Get Store Variable  pet_status
+    ${pet_name}  Get Variable From Table  pet_name
+    ${pet_id}  Get Variable From Table  pet_id
+    ${pet_status}  Get Variable From Table  pet_status
     ${order_id}  Get Store Variable  order_id
 
     ${add_order_post_response}  Store.store_post_requests  ${order_id}  ${pet_id}
@@ -30,9 +34,9 @@ Add new oder for purchasing pet
 
 Delete new order
     [Documentation]  Add new order, delete and check it
-    ${pet_name}  Get Store Variable  pet_name
-    ${pet_id}  Get Store Variable   pet_id
-    ${pet_status}  Get Store Variable  pet_status
+    ${pet_name}  Get Variable From Table  pet_name
+    ${pet_id}  Get Variable From Table  pet_id
+    ${pet_status}  Get Variable From Table  pet_status
     ${order_id}  Get Store Variable  order_id
 
     ${add_order_post_response}  Store.store_post_requests  ${order_id}  ${pet_id}
