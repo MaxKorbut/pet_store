@@ -4,21 +4,9 @@ def setBuildName(){
 
 pipeline {
 
-    environment{
-
-    }
-    agent{
-        label 'master'
-    }
     stages{
 
         stage('Run Jenkins docker-slave'){
-            agent{
-                docker {
-                    image "jenkins-slave"
-                    label "master"
-                }
-            }
             stages{
                 stage('Run tests'){
                     steps{
