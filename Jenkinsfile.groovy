@@ -3,15 +3,14 @@ def setBuildName(){
 }
 
 pipeline {
-
     agent{
         label 'master'
     }
 
     triggers {
-        parameterizedCron("""
-            H/5 * * * *
-        """)
+        cron('''
+            H/2 * * * *
+        ''')
     }
 
     stages{
