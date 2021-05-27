@@ -8,15 +8,19 @@ pipeline {
         label 'master'
     }
 
+    triggers {
+        parameterizedCron("""
+            H/5 * * * *
+        """)
+    }
+
     stages{
+
         stage('Run tests'){
             steps{
                 lock(env.email){
                     script{
-
                         def test_case = "./tests"
-
-
                         try{
                             def robotCmd = "robot"
                             robotCmd = robotCmd + " " + "${test_case}"
@@ -30,6 +34,7 @@ pipeline {
                 }
             }
         }
+
         stage('Publish Robot Framework results'){
             steps{
                 step([
