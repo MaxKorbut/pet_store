@@ -53,3 +53,8 @@ Delete new pet
     ${delete_pet_response}  Pet.pet_delete_requests  ${added_pet_id}
     ${delete_pet_message}  Get Pet Message  ${delete_pet_response}
     Should Be Equal  ${added_pet_id}  ${${delete_pet_message}}
+
+Negative test
+    ${expected_result}  False
+    ${actual_resutls}  True
+    Should Be Equal  ${expected_result}  ${actual_resutls}
