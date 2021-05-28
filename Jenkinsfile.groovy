@@ -47,13 +47,9 @@ pipeline {
                     passThreshold : 100,
                     unstableThreshold: 80.0,
                     otherFiles : "*.png",
+                    reportFilenamePattern: '**/output.xml',
                 ])
             }
-        }
-    }
-    post {
-        always {
-            step([$class: 'Publisher', reportFilenamePattern: '**/output.xml'])
         }
     }
 }
